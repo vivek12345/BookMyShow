@@ -1,0 +1,29 @@
+.main_container
+{
+	width:500px;
+	height:400px;
+	margin:24px;
+	background:#FAFAFA;
+}
+#tickets_map
+{
+	margin:7px;
+	position:relative;
+}
+#tickets_map li
+{
+	list-style: none;
+	position: absolute;
+}
+#tickets_map a
+{
+	text-decoration: none;
+}
+
+#tickets_map .seat
+{
+	background:url("img/available_seat_img.gif") no-repeat scroll 0 0 transparent;
+	height:33px;
+	width:33px;
+	display:block;  
+}
