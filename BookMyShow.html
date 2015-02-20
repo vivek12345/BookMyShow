@@ -7,14 +7,17 @@
 		</script> 
 		<script type="text/javascript" src="js/bookShow.js">
 		</script>
-
-
 	</head>
 	<body>
 		<p>Click here to book your tickets</p>
 		<div class="main_container">
 			<ul id="tickets_map">
 			</ul>
+			<script type="text/javascript">
+			var bookedSeats = [5, 10, 25,21,45,74,89,99,161];
+			var no_of_seats=3;
+			createSeats(bookedSeats);
+			</script>
 		</div>
 	</body>
 </html>
