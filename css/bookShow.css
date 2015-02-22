@@ -1,15 +1,21 @@
+
+.container
+{
+	padding-top:60px;
+}
 .main_container
 {
 	width:520px;
-	height:300px;
+	/*height:700px;*/
 	background:#FAFAFA;
-    border:1px solid #A4A4A4;
+	/*border: 1px solid #dce3b6;*/
     margin-left:10px;   
 }
 #tickets_map
 {
-	margin:7px;
+	margin:0px 7px;
 	position:relative;
+	padding-left: 0px;
 }
 #tickets_map li
 {
@@ -26,7 +32,7 @@
 	background:url("../img/available_seat.png") no-repeat scroll 0 0 transparent;
 	height:19px;
 	width:19px;
-	display:block;  
+	/*display:block;*/  
 }
 #tickets_map .selectedSeat
 {
@@ -37,7 +43,42 @@
 	background:url("../img/selected_seat.png") no-repeat scroll 0 0 transparent;
 }
 
-/*#tickets_map .col-5
+#tickets_map .col-2,#tickets_map .col-22
 {
-	margin-left:10px;
-}*/
+	margin-right:10px;
+}
+.gold_tickets_map
+{
+	background-color: #f0f6dc;
+	height:110px;
+	border: 1px solid #dce3b6;
+}
+.silver_tickets_map
+{
+	background-color: #fce9e2;
+	margin-top:50px;
+	height:180px;
+	border: 1px solid #dce3b6;
+}
+.bronze_tickets_map
+{
+	background-color: #fbf8cf;;
+	margin-top:50px;
+	height:110px;
+	border: 1px solid #dce3b6;
+}
+.invisible
+{
+	display: none;
+}
+.category
+{
+
+	padding: 15px 6px 10px 15px;
+	font-size: 14px;
+	font-weight: bold;
+	height: 20px;
+	font-family: 'Open Sans Condensed';
+	border-bottom: 1px solid #dce3b6;
+	margin:0px;
+}
