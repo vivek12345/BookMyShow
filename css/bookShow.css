@@ -5,11 +5,11 @@
 }
 .main_container
 {
-	width:520px;
+	//width:520px;
 	/*height:700px;*/
 	background:#FAFAFA;
-	/*border: 1px solid #dce3b6;*/
-    margin-left:10px;   
+	/*border: 1px solid #dce3b6;*/ 
+    overflow:auto;  
 }
 #tickets_map
 {
@@ -56,14 +56,14 @@
 .silver_tickets_map
 {
 	background-color: #fce9e2;
-	margin-top:50px;
+	margin-top:30px;
 	height:180px;
 	border: 1px solid #dce3b6;
 }
 .bronze_tickets_map
 {
 	background-color: #fbf8cf;;
-	margin-top:50px;
+	margin-top:30px;
 	height:110px;
 	border: 1px solid #dce3b6;
 }
@@ -74,11 +74,15 @@
 .category
 {
 
-	padding: 15px 6px 10px 15px;
+	padding: 7px 6px 25px 15px;
 	font-size: 14px;
 	font-weight: bold;
 	height: 20px;
 	font-family: 'Open Sans Condensed';
 	border-bottom: 1px solid #dce3b6;
 	margin:0px;
+}
+.alert
+{
+	display:none;
 }

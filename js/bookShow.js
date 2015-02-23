@@ -34,16 +34,16 @@ var createSeats=function(reservedSeat)
 			if(seatNumber==51)
 				{
 
-					seatList.push("</ul></div>"+"<div class='silver_tickets_map'><p class='category'>SILVER (Rs "+settings.price.silver+")"+"</p>"+"<ul id='tickets_map'>");
+					seatList.push("</ul></div>"+"<div class='silver_tickets_map col-md-12'><p class='category'>SILVER (Rs "+settings.price.silver+")"+"</p>"+"<ul id='tickets_map'>");
 					k=0;
 				}
 				else if(seatNumber==151)
 				{
-					seatList.push("</ul></div>"+"<div class='bronze_tickets_map'><p class='category'>BRONZE (Rs "+settings.price.bronze+")"+"</p>"+"<ul id='tickets_map'>");
+					seatList.push("</ul></div>"+"<div class='bronze_tickets_map col-md-12'><p class='category'>BRONZE (Rs "+settings.price.bronze+")"+"</p>"+"<ul id='tickets_map'>");
 					k=0;
 				}
 				else if(seatNumber==1)
-				seatList.push("<div class='gold_tickets_map'><p class='category'>GOLD (Rs "+settings.price.gold+")"+"</p>"+"<ul id='tickets_map'>");
+				seatList.push("<div class='gold_tickets_map col-md-12'><p class='category'>GOLD (Rs "+settings.price.gold+")"+"</p>"+"<ul id='tickets_map'>");
 
 			seatClass=settings.seatCss+' '+settings.rowCssPrefix+i.toString()+' '+settings.colCssPrefix+j.toString();
 			
@@ -78,7 +78,18 @@ function isAdjacentSeat(selectedSeatArray)
 		{
 			if(selectingSeatArray[i]!=(parseInt(prev_value)+1))
 			{
-				alert("Please select adjacent seats");
+				/*alert("Please select adjacent seats");*/
+				$('.alert > span').html("Please select adjacent seats");
+				/*if($('.alert').hasClass('alert-success'))
+				{
+					$('.alert').removeClass('alert-success');
+				}
+				if($('.alert').hasClass('alert-warning'))
+				{
+					$('.alert').removeClass('alert-warning');
+				}
+				$('.alert').addClass('alert-danger');*/
+				$('.alert').show();
 				return false;
 			}
 			else
@@ -161,7 +172,17 @@ window.onload=function()
 	{
 		if($(this).hasClass(settings.selectedSeatCss))
 		{
-			alert("Already Selected Seat");	
+			$('.alert > span').html("Already Selected Seat");
+			/*if($('.alert').hasClass('alert-success'))
+			{
+				$('.alert').removeClass('alert-success');
+			}
+			if($('.alert').hasClass('alert-warning'))
+			{
+				$('.alert').removeClass('alert-warning');
+			}
+			$('.alert').addClass('alert-danger');*/
+			$('.alert').show();	
 		}
 		else
 		{
@@ -172,6 +193,7 @@ window.onload=function()
 				if(index!=-1)
 				{
 					selectingSeatArray.splice(index,1);
+					$('.checkout').addClass("disabled");
 				}
 				no_of_seats++;
 			}
@@ -179,7 +201,18 @@ window.onload=function()
 			{
 				if(no_of_seats==0)
 				{
-					alert("Seats already selected,Proceed to checkout,or change the number of seats you want");
+					/*alert("Seats already selected,Proceed to checkout,or change the number of seats you want");*/
+					$('.alert > span').html("Seats already selected,Proceed to checkout,or change the number of seats you want");
+					/*if($('.alert').hasClass('alert-success'))
+					{
+						$('.alert').removeClass('alert-success');
+					}
+					if($('.alert').hasClass('alert-danger'))
+					{
+						$('.alert').removeClass('alert-danger');
+					}
+					$('.alert').addClass('alert-warning');*/
+					$('.alert').show();
 				}
 				else
 				{
@@ -193,7 +226,32 @@ window.onload=function()
 						{
 							if(isSingleSiloCreated(selectingSeatArray))
 							{
-								alert("single silo created");
+								$('.alert > span').html("Single silo created");
+								/*if($('.alert').hasClass('alert-success'))
+								{
+									$('.alert').removeClass('alert-success');
+								}
+								if($('.alert').hasClass('alert-warning'))
+								{
+									$('.alert').removeClass('alert-warning');
+								}
+								$('.alert').addClass('alert-danger');*/
+								$('.alert').show();
+							}
+							else
+							{
+								$('.alert > span').html("Seats selected,now proceed to checkout");
+								/*if($('.alert').hasClass('alert-warning'))
+								{
+									$('.alert').removeClass('alert-warning');
+								}
+								if($('.alert').hasClass('alert-danger'))
+								{
+									$('.alert').removeClass('alert-danger');
+								}
+								$('.alert').addClass('alert-success');*/
+								$('.alert').show();
+								$('.checkout').removeClass("disabled");
 							}
 						}
 						
@@ -203,4 +261,17 @@ window.onload=function()
 			}
 		}
 	});
+
+
+	$('.btn-success').click(function(){
+
+		$('.modal-title').html("New movie");
+		$('.modal').modal('show'); 
+
+
+	});
+	$('.alert .close').on('click', function(e) {
+    	$(this).parent().hide();
+	});
+
 };
