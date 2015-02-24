@@ -191,15 +191,15 @@ function isSingleSiloCreated(selectedSeatArray)
 		var start_seat=selectingSeatArray[0];
 		var end_seat=selectingSeatArray[selectingSeatArray.length-1];
 		var left=false,right=false;
-		
+		var selected_movie=$('.movies-toggle span').text();
 		if(start_seat%25!=1)
 		{
-			left=checkLeft(start_seat,end_seat);
+			left=checkLeft(start_seat,end_seat,selected_movie);
 		}
 		
 		if(end_seat%25!=0)
 		{
-			right=checkRight(end_seat,start_seat);
+			right=checkRight(end_seat,start_seat,selected_movie);
 		}
 		if(left || right)
 		{
@@ -209,18 +209,18 @@ function isSingleSiloCreated(selectedSeatArray)
 	return false;
 }
 
-function checkLeft(start_seat,end_seat)
+function checkLeft(start_seat,end_seat,selected_movie)
 {
 	if(start_seat%25!=2)
 	{
-		if(!($.inArray(parseInt(start_seat)-1+'', bookedSeats) != -1) && ($.inArray(parseInt(start_seat)-2+'',bookedSeats)!=-1 || ($.inArray(parseInt(start_seat)-2,invisibleSeats)!=-1)) && end_seat%25!=0 && (!($.inArray(parseInt(end_seat)+1+'', bookedSeats) != -1) && !($.inArray(parseInt(end_seat)+1, invisibleSeats) != -1)) && !($.inArray(parseInt(start_seat)-1, invisibleSeats) != -1))
+		if(!($.inArray(parseInt(start_seat)-1+'', bookedSeats[selected_movie]) != -1) && ($.inArray(parseInt(start_seat)-2+'',bookedSeats[selected_movie])!=-1 || ($.inArray(parseInt(start_seat)-2,invisibleSeats)!=-1)) && end_seat%25!=0 && (!($.inArray(parseInt(end_seat)+1+'', bookedSeats[selected_movie]) != -1) && !($.inArray(parseInt(end_seat)+1, invisibleSeats) != -1)) && !($.inArray(parseInt(start_seat)-1, invisibleSeats) != -1))
 		{
 			return true;
 		}
 	}
 	else
 	{
-		if(!($.inArray(parseInt(start_seat)-1+'', bookedSeats) != -1))
+		if(!($.inArray(parseInt(start_seat)-1+'', bookedSeats[selected_movie]) != -1) && !($.inArray(parseInt(end_seat)+1,invisibleSeats)!=-1))
 		{
 			return true;
 		}	
@@ -228,18 +228,18 @@ function checkLeft(start_seat,end_seat)
 	return false;
 }
 
-function checkRight(end_seat,start_seat)
+function checkRight(end_seat,start_seat,selected_movie)
 {
 	if(end_seat%25!=24)
 	{
-		if(!($.inArray(parseInt(end_seat)+1+'', bookedSeats) != -1) && (($.inArray(parseInt(end_seat)+2+'',bookedSeats)!=-1) || ($.inArray(parseInt(end_seat)+2,invisibleSeats)!=-1)) && !($.inArray(parseInt(start_seat)-1+'', bookedSeats) != -1)) 	
+		if(!($.inArray(parseInt(end_seat)+1+'', bookedSeats[selected_movie]) != -1) && (($.inArray(parseInt(end_seat)+2+'',bookedSeats[selected_movie])!=-1) || ($.inArray(parseInt(end_seat)+2,invisibleSeats)!=-1)) && start_seat%25!=1 && !($.inArray(parseInt(start_seat)-1+'', bookedSeats[selected_movie]) != -1) && !($.inArray(parseInt(start_seat)-1,invisibleSeats)!=-1)) 	
 		{
 			return true;
 		}
 	}
 	else
 	{
-		if(!($.inArray(parseInt(end_seat)+1+'', bookedSeats) != -1) && !($.inArray(parseInt(start_seat)-1,invisibleSeats)!=-1))
+		if(!($.inArray(parseInt(end_seat)+1+'', bookedSeats[selected_movie]) != -1) && !($.inArray(parseInt(start_seat)-1,invisibleSeats)!=-1))
 		{
 			return true;
 		}
@@ -284,7 +284,7 @@ $(document).ready(function()
 			console.log(bookedSeats[selected_movie]);
 			localStorage.setItem('reservedSeat',JSON.stringify(bookedSeats));
 			console.log(JSON.parse(localStorage.getItem('reservedSeat')));
-			window.location = "file:///D:/BookMyShow/trunk/home.html";
+			window.location = "file:///F:/Dunia/trunk/home.html";
 		}
 	});
 
