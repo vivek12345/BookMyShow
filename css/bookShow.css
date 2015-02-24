@@ -1,7 +1,7 @@
 
 .container
 {
-	padding-top:60px;
+	padding-top:20px;
 }
 .main_container
 {
@@ -85,4 +85,74 @@
 .alert
 {
 	display:none;
+}
+
+.btn-input {
+   display: block;
+}
+
+.btn-input .btn.form-control {
+    text-align: left;
+}
+
+.btn-input .btn.form-control span:first-child {
+   left: 10px;
+   overflow: hidden;
+   position: absolute;
+   right: 25px;
+}
+
+.btn-input .btn.form-control .caret {
+   margin-top: -1px;
+   position: absolute;
+   right: 10px;
+   top: 50%;
+}
+
+.carousel-inner>.item > img
+{
+	width:93%;
+	height:300px;
+	margin:0 auto;
+	border-radius:10px;
+	border:1px solid #000;
+}
+.navbar
+{
+	margin-bottom:10px;
+}
+
+/*.movies,.movie_category
+{
+	position: absolute;
+	width:100%;
+}*/
+.dropdown-menu
+{
+	position: absolute;
+	/*width:90%;*/
+	left:15px;
+}
+
+.book
+{
+	margin-top: 20px;
+}
+
+.modal-content
+{
+	background: #fff;
+}
+
+.modal-content p,.modal-content h4
+{
+	color:#145;
+}
+.close
+{
+	color:#000;
+}
+.close:hover
+{
+	color:#000;
 }
