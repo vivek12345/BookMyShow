@@ -217,7 +217,9 @@ function checkLeft(start_seat,end_seat,selected_movie)
 		{
 			return true;
 		}
-	}
+	}	
+
+
 	else
 	{
 		if(!($.inArray(parseInt(start_seat)-1+'', bookedSeats[selected_movie]) != -1) && !($.inArray(parseInt(end_seat)+1,invisibleSeats)!=-1))
@@ -236,6 +238,7 @@ function checkRight(end_seat,start_seat,selected_movie)
 		{
 			return true;
 		}
+		
 	}
 	else
 	{
@@ -293,11 +296,38 @@ $(document).ready(function()
 	$( document.body ).on( 'click', '.dropdown-menu li', function( event ) {
 
 		var $target = $( event.currentTarget );
+		
+
 
 		$target.closest( '.btn-group' )
 		.find( '[data-bind="label"]' ).text( $target.text() )
 		.end()
 		.children( '.dropdown-toggle' ).dropdown( 'toggle' );
+		if($target.closest( '.btn-group').find('[data-toggle="dropdown"]').hasClass('movies-toggle'))
+		{
+			if($target.closest( '.btn-group' ).find( '[data-bind="label"]' ).text()!="Select Movie")
+			{
+				$('.category-toggle').removeClass('disabled');
+			}
+			else
+			{
+				$('.category-toggle').addClass('disabled');
+			}
+		}
+		else if($target.closest( '.btn-group' ).find('[data-toggle="dropdown"]').hasClass('category-toggle'))
+		{
+			if($target.closest( '.btn-group' ).find( '[data-bind="label"]' ).text()!="Select Category")
+			{
+				$('.quantity-toggle').removeClass('disabled');
+			}
+			else
+			{
+				$('.quantity-toggle').addClass('disabled');
+			}
+
+		}
+		else
+			$('.book').removeClass('disabled');
 
 		return false;
 
