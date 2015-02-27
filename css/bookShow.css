@@ -1,12 +1,15 @@
-
+/*
+*	This css file contains all the styling that is custome for this webpage
+*	Author:-Vivek Nayyar
+*/
 .container
 {
 	padding-top:20px;
 }
 .main_container
 {
-	//width:520px;
-	/*height:700px;*/
+	/*width:520px;
+	height:700px;*/
 	background:#FAFAFA;
 	/*border: 1px solid #dce3b6;*/ 
     overflow:auto;  
@@ -122,11 +125,6 @@
 	margin-bottom:10px;
 }
 
-/*.movies,.movie_category
-{
-	position: absolute;
-	width:100%;
-}*/
 .dropdown-menu
 {
 	position: absolute;

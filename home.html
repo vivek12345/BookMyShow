@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Book My ShowM</title>
+		<title>Book My Tickets</title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/bookShow.css"/>
 		<script type="text/javascript" src="js/jquery.js">
@@ -77,7 +77,7 @@
 
 
 		
-
+		<!--Ticket booking panel with dropdown for selecting movie,category and quantity-->
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
@@ -140,12 +140,18 @@
 						<h4 class="modal-title"></h4>
 					</div>
 					<div class="modal-body">
+
 					<div class="seats_alert alert alert-dismissible" role="alert">
   					<button type="button" class="close"><span aria-hidden="true">&times;</span></button>
   					<span></span>
 					</div>
-						<!--p>One fine body&hellip;</p-->
+					<div class="book_alert alert alert-success alert-dismissible" role="alert">
+  					<button type="button" class="close"><span aria-hidden="true">&times;</span></button>
+  					<span></span>
+					</div>
+						
 						<div class="main_container" id="container">
+							<!--Inside here the seat map will be created by the js file-->
 						</div>
 					</div>
 					<div class="modal-footer">

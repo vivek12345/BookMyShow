@@ -1,3 +1,4 @@
+/*Define a settings object which will be required for setting up the theatre seats*/
 var settings=
 {
 	rows:8,
@@ -28,6 +29,7 @@ var bookedSeats={};
 var selectingSeatArray=[];
 var invisibleSeats=[];
 var no_of_seats;
+/*This function will dynamically generate seats and insert them as <li> items in the different categories that have been defined here*/
 function createSeats(reservedSeat)
 {
 	var seatList=[],seatNumber,seatClass;
@@ -77,7 +79,7 @@ function createSeats(reservedSeat)
 	document.getElementById("container").innerHTML=seatList.join('');
 	setUpClickBinding();
 };
-
+/*All event binding are done here*/
 function setUpClickBinding()
 {
 	$('.'+settings.seatCss).click(function()
@@ -154,61 +156,58 @@ function setUpClickBinding()
 	});
 
 }
-
+/*The sorting function to sort the seat numbers*/
 function sortNumber(a,b)
 {
 	return a-b;	
 }
+/*This functions will check for adjacent seat condition and will return false,if the seats are not adjacent*/
 function isAdjacentSeat(selectedSeatArray)
 {
 	var prev_value=parseInt(selectingSeatArray[0]);
-	if(selectingSeatArray.length>1)
+	
+	for(var i=1;i<selectingSeatArray.length;i++)
 	{
-		for(var i=1;i<selectingSeatArray.length;i++)
+		if(selectingSeatArray[i]!=(parseInt(prev_value)+1))
 		{
-			if(selectingSeatArray[i]!=(parseInt(prev_value)+1))
-			{
-				
-				$('.seats_alert > span').html("Please select adjacent seats");
-				$('.seats_alert').removeClass('.alert-success').addClass('alert-danger');
-				$('.seats_alert').show();
-				return false;
-			}
-			else
-			{
-				prev_value=selectingSeatArray[i];
-			}
+			
+			$('.seats_alert > span').html("Please select adjacent seats");
+			$('.seats_alert').removeClass('.alert-success').addClass('alert-danger');
+			$('.seats_alert').show();
+			return false;
 		}
+		else
+		{
+			prev_value=selectingSeatArray[i];
+		}
+	}
+	return true;
+	
+}
+/*This function will check that user is creating a siingle silo,until and unless there is no other alternative*/
+function isSingleSiloCreated(selectedSeatArray)
+{
+	
+	var start_seat=selectingSeatArray[0];
+	var end_seat=selectingSeatArray[selectingSeatArray.length-1];
+	var left=false,right=false;
+	var selected_movie=$('.movies-toggle span').text();
+	if(start_seat%25!=1)
+	{
+		left=checkLeft(start_seat,end_seat,selected_movie);
+	}
+
+	if(end_seat%25!=0)
+	{
+		right=checkRight(end_seat,start_seat,selected_movie);
+	}
+	if(left || right)
+	{
 		return true;
 	}
 	return false;
 }
-
-function isSingleSiloCreated(selectedSeatArray)
-{
-	if(selectingSeatArray.length>1)
-	{
-		var start_seat=selectingSeatArray[0];
-		var end_seat=selectingSeatArray[selectingSeatArray.length-1];
-		var left=false,right=false;
-		var selected_movie=$('.movies-toggle span').text();
-		if(start_seat%25!=1)
-		{
-			left=checkLeft(start_seat,end_seat,selected_movie);
-		}
-		
-		if(end_seat%25!=0)
-		{
-			right=checkRight(end_seat,start_seat,selected_movie);
-		}
-		if(left || right)
-		{
-			return true;
-		}
-	}
-	return false;
-}
-
+/*It will check the left seats for single silo conditions*/
 function checkLeft(start_seat,end_seat,selected_movie)
 {
 	if(start_seat%25!=2)
@@ -219,7 +218,6 @@ function checkLeft(start_seat,end_seat,selected_movie)
 		}
 	}	
 
-
 	else
 	{
 		if(!($.inArray(parseInt(start_seat)-1+'', bookedSeats[selected_movie]) != -1) && !($.inArray(parseInt(end_seat)+1,invisibleSeats)!=-1))
@@ -229,7 +227,7 @@ function checkLeft(start_seat,end_seat,selected_movie)
 	}
 	return false;
 }
-
+/*This will check the right seats for single silo condition*/
 function checkRight(end_seat,start_seat,selected_movie)
 {
 	if(end_seat%25!=24)
@@ -253,13 +251,12 @@ function checkRight(end_seat,start_seat,selected_movie)
 /*window.onload=function()*/
 $(document).ready(function()
 {	
-								
+	/*Retrieve the already booked tickets from the local storage*/							
 	if(localStorage.getItem('reservedSeat'))
 	{
 		bookedSeats=JSON.parse(localStorage.getItem('reservedSeat'));
-		console.log(bookedSeats);
 	}
-								
+	/*When user clicks on book tickets, create a seat map for him for the movie he/she has selected*/							
 	$('.btn-success').click(function()
 	{
 
@@ -275,18 +272,22 @@ $(document).ready(function()
 
 
 	});
+
 	$('.alert .close').on('click', function(e) {
     	$(this).parent().hide();
 	});
 
+	/*On checkout, save the selected seats for a particular movie in the local storage*/
 	$('.checkout').click(function(){
 		if(typeof(Storage)!="undefined")
 		{
 			var selected_movie=$('.movies-toggle span').text();
 			bookedSeats[selected_movie]=bookedSeats[selected_movie].concat(selectingSeatArray);
-			console.log(bookedSeats[selected_movie]);
 			localStorage.setItem('reservedSeat',JSON.stringify(bookedSeats));
-			console.log(JSON.parse(localStorage.getItem('reservedSeat')));
+			
+			$('.book_alert > span').html("Seats booked,proceeding to the home page now");
+			$('.seats_alert').hide();
+			$('.book_alert').show();
 			setTimeout(function () {
        			window.location = "file:///F:/Dunia/trunk/home.html"; //will redirect to your blog page (an ex: blog.html)
     		}, 2000)
@@ -295,7 +296,7 @@ $(document).ready(function()
 	});
 
 
-
+	/*This function is for the dropdown on the main page,do not allow the user to select the quantity and category,until he has selected the movie*/
 	$( document.body ).on( 'click', '.dropdown-menu li', function( event ) {
 
 		var $target = $( event.currentTarget );
@@ -336,6 +337,7 @@ $(document).ready(function()
 
 	});
 
+	/*Populate the movies,categories and qunatity dropdown*/
 	var movies=[];
 	for(var i=0;i<settings.movies.length;i++)
 		movies.push('<li>'+'<a href="#">'+settings.movies[i]+'</a>'+'</li>');
