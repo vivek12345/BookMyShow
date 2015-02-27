@@ -84,9 +84,9 @@ function setUpClickBinding()
 	{
 		if($(this).hasClass(settings.selectedSeatCss))
 		{
-			$('.alert > span').html("Already Selected Seat");
-			$('.alert').removeClass('alert-success').addClass('alert-danger');
-			$('.alert').show();	
+			$('.seats_alert > span').html("Already Selected Seat");
+			$('.seats_alert').removeClass('alert-success').addClass('alert-danger');
+			$('.seats_alert').show();	
 		}
 		else
 		{
@@ -108,9 +108,9 @@ function setUpClickBinding()
 				if(no_of_seats==0)
 				{
 					
-					$('.alert > span').html("Seats already selected,Proceed to checkout,or change the number of seats you want");
-					$('.alert').removeClass('.alert-success').addClass('alert-danger');
-					$('.alert').show();
+					$('.seats_alert > span').html("Seats already selected,Proceed to checkout,or change the number of seats you want");
+					$('.seats_alert').removeClass('.alert-success').addClass('alert-danger');
+					$('.seats_alert').show();
 				}
 				else
 				{
@@ -126,15 +126,15 @@ function setUpClickBinding()
 							{
 								if(isSingleSiloCreated(selectingSeatArray))
 								{
-									$('.alert > span').html("Single silo created");
-									$('.alert').removeClass('.alert-success').addClass('alert-danger');
-									$('.alert').show();
+									$('.seats_alert > span').html("Single silo created");
+									$('.seats_alert').removeClass('.alert-success').addClass('alert-danger');
+									$('.seats_alert').show();
 								}
 								else
 								{
-									$('.alert > span').html("Seats selected,now proceed to checkout");
-									$('.alert').removeClass('alert-danger').addClass('alert-success');
-									$('.alert').show();
+									$('.seats_alert > span').html("Seats selected,now proceed to checkout");
+									$('.seats_alert').removeClass('alert-danger').addClass('alert-success');
+									$('.seats_alert').show();
 									$('.checkout').removeClass("disabled");
 								}
 							}
@@ -143,9 +143,9 @@ function setUpClickBinding()
 					}
 					else
 					{
-						$('.alert > span').html("You can select tickets only from "+selected_category+' category');
-						$('.alert').removeClass('.alert-success').addClass('alert-danger');
-						$('.alert').show();
+						$('.seats_alert > span').html("You can select tickets only from "+selected_category+' category');
+						$('.seats_alert').removeClass('.alert-success').addClass('alert-danger');
+						$('.seats_alert').show();
 					}
 
 				}
@@ -169,9 +169,9 @@ function isAdjacentSeat(selectedSeatArray)
 			if(selectingSeatArray[i]!=(parseInt(prev_value)+1))
 			{
 				
-				$('.alert > span').html("Please select adjacent seats");
-				$('.alert').removeClass('.alert-success').addClass('alert-danger');
-				$('.alert').show();
+				$('.seats_alert > span').html("Please select adjacent seats");
+				$('.seats_alert').removeClass('.alert-success').addClass('alert-danger');
+				$('.seats_alert').show();
 				return false;
 			}
 			else
@@ -287,7 +287,10 @@ $(document).ready(function()
 			console.log(bookedSeats[selected_movie]);
 			localStorage.setItem('reservedSeat',JSON.stringify(bookedSeats));
 			console.log(JSON.parse(localStorage.getItem('reservedSeat')));
-			window.location = "file:///F:/Dunia/trunk/home.html";
+			setTimeout(function () {
+       			window.location = "file:///F:/Dunia/trunk/home.html"; //will redirect to your blog page (an ex: blog.html)
+    		}, 2000)
+			
 		}
 	});
 
